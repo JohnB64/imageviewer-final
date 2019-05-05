@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 /**
- * Write a description of class WarholFilter here.
+ * Creates a four grided image with the orginal image an dthe three channels applied.
  *
  * @author John Burkert
  * @version April 29th 2019
@@ -11,10 +11,13 @@ public class WarholFilter extends Filter
 {
     
     private OFImage original;
+    private OFImage blueChannel;
+    private OFImage redChannel;
+    private OFImage greenChannel;
+    
     private int width;
     private int height;
-    private int xpos;
-    private int ypos;
+    
     
     /**
      * Constructor for objects of class WarholFilter.
@@ -34,8 +37,22 @@ public class WarholFilter extends Filter
     {
         
         original = new OFImage(image);
-        width = original.getWidth();
-        height = original.getHeight();
+        blueChannel = new OFImage(image);
+        redChannel = new OFImage(image);
+        greenChannel = new OFImage(image);
+        
+        int width = original.getWidth() /2;
+        int height = original.getHeight() /2;
+        
+        int width1 = blueChannel.getWidth() /2;
+        int height1 = blueChannel.getHeight() /2;
+        
+        int width2 = redChannel.getWidth() /2;
+        int height2 = redChannel.getHeight() /2;
+        
+        int width3 = greenChannel.getWidth() /2;
+        int height3 = greenChannel.getHeight() /2;
+
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
@@ -43,35 +60,37 @@ public class WarholFilter extends Filter
                 int red = (pix.getRed());
                 int green = (pix.getGreen());
                 int blue = (pix.getBlue());
-                image.setPixel(x, y, new Color(red, green, blue));
+                image.setPixel(x + width, y + height, new Color(red, green, blue));
             }
-        }
+        } 
         
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int y = 0; y < height2; y++) {
+            for(int x = 0; x < width2; x++) {
                 Color pix = image.getPixel(x, y);
                 int red = (pix.getRed());
                 image.setPixel(x, y, new Color(red, 0, 0));
             }
-        }
+        } 
         
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int y = 0; y < height3; y++) {
+            for(int x = 0; x < width3; x++) {
                 Color pix = image.getPixel(x, y);
                 int green = (pix.getGreen());
                 image.setPixel(x, y, new Color(0, green, 0));
             }
-        }
+        } 
         
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        
+        
+        for(int y = 0; y < height1; y++) {
+            for(int x = 0; x < width1; x++) {
+                
                 Color pix = image.getPixel(x, y);
                 int blue = (pix.getBlue());
-                image.setPixel(x, y, new Color(0, 0, blue));
+                image.setPixel(x + width1, y + height1, new Color(0, 0, blue));
             }
-        }
+        }  
      
     }
-    
-    
+
 }
