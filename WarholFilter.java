@@ -60,7 +60,7 @@ public class WarholFilter extends Filter
                 int red = (pix.getRed());
                 int green = (pix.getGreen());
                 int blue = (pix.getBlue());
-                image.setPixel(x + width, y + height, new Color(red, green, blue));
+                image.setPixel(x, y, new Color(red, green, blue));
             }
         } 
         
@@ -68,7 +68,7 @@ public class WarholFilter extends Filter
             for(int x = 0; x < width2; x++) {
                 Color pix = redChannel.getPixel(x, y);
                 int red = (pix.getRed());
-                image.setPixel(x, y, new Color(red, 0, 0));
+                image.setPixel(x + width2, y, new Color(red, 0, 0));
             }
         } 
         
@@ -84,7 +84,7 @@ public class WarholFilter extends Filter
             for(int x = 0; x < width1; x++) {                
                 Color pix = blueChannel.getPixel(x, y);
                 int blue = (pix.getBlue());
-                image.setPixel(x + width1, y, new Color(0, 0, blue));
+                image.setPixel(x + width1, y + height1, new Color(0, 0, blue));
             }
         }  
      
